@@ -1,8 +1,11 @@
 [package]
-name = "test_package"
+name = "Rust"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+rustc_middle    = { path = "D:/Programming/Dev/rust/compiler/rustc_middle" }
+rustc_hir       = { path = "D:/Programming/Dev/rust/compiler/rustc_hir" }
+rustc_driver    = { path = "D:/Programming/Dev/rust/compiler/rustc_driver" }
