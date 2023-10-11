@@ -1,11 +1,12 @@
 [package]
-name = "Rust"
+name = "BachelorProject"
 version = "0.1.0"
-edition = "2021"
+edition = "2023"
+authors = ["Jacob Martens"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rustc_middle    = { path = "D:/Programming/Dev/rust/compiler/rustc_middle" }
-rustc_hir       = { path = "D:/Programming/Dev/rust/compiler/rustc_hir" }
-rustc_driver    = { path = "D:/Programming/Dev/rust/compiler/rustc_driver" }
+rustc_middle    = { path = "../rust/compiler/rustc_middle" }
+rustc_hir       = { path = "../rust/compiler/rustc_hir" }
+rustc_driver    = { path = "../rust/compiler/rustc_driver" }
