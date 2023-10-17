@@ -26,34 +26,21 @@ as well as allowing some custom code run after different phases of the compilati
 */
 
 extern crate rustc_driver;
+extern crate rustc_interface;
 extern crate rustc_hir;
 extern crate rustc_middle;
 
+use rustc_middle::ty::TyCtxt;
 use rustc_middle::query::Providers;
-use rustc_driver::RunCompiler;
 
 fn main() {
-    rustc_driver::init_env_logger();
-    rustc_driver::catch_fatal_errors(|| {
-        run_compiler(&std::env::args().collect::<Vec<String>>(), &mut MyCompilerCalls, None, None)
-    })
-        .exit()
+    let mut callbacks = rustc_driver::TimePassesCallbacks::default();
+    let run_compiler = rustc_driver::RunCompiler::new(&std::env::args().collect::<Vec<String>>(), &mut callbacks);
+    let item_type = tcx.type_of(def_id);
 }
 
-struct MyCompilerCalls;
 
-impl rustc_driver::Callbacks for MyCompilerCalls {
-    fn config(&mut self, config: &mut rustc_interface::Config) {
-        config.override_queries = Some(|_sess, providers, _external_providers| {
-            override_queries(providers);
-        });
-    }
-}
 
-fn override_queries(providers: &mut Providers) {
-    providers.some_query = |tcx, key| {
-        let original = tcx.original_some_query(key);
-        // Your query logic here
-        original
-    };
-}
+
+// Prusti interface
+// LocalDefId is local to e.g. MIR, HIR etc. GlobalDefId is the same always. 

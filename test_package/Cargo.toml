@@ -1,7 +1,7 @@
 [package]
-name = "BachelorProject"
+name = "test_package"
 version = "0.1.0"
-edition = "2023"
+edition = "2021"
 authors = ["Jacob Martens"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -10,3 +10,5 @@ authors = ["Jacob Martens"]
 rustc_middle    = { path = "../rust/compiler/rustc_middle" }
 rustc_hir       = { path = "../rust/compiler/rustc_hir" }
 rustc_driver    = { path = "../rust/compiler/rustc_driver" }
+rustc_interface = { path = "../rust/compiler/rustc_interface" }
+
