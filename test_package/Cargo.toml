@@ -7,8 +7,14 @@ authors = ["Jacob Martens"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rustc_middle    = { path = "../rust/compiler/rustc_middle" }
-rustc_hir       = { path = "../rust/compiler/rustc_hir" }
-rustc_driver    = { path = "../rust/compiler/rustc_driver" }
-rustc_interface = { path = "../rust/compiler/rustc_interface" }
+rustc_middle        = { path = "../rust/compiler/rustc_middle" }
+rustc_hir           = { path = "../rust/compiler/rustc_hir" }
+rustc_driver        = { path = "../rust/compiler/rustc_driver" }
+rustc_interface     = { path = "../rust/compiler/rustc_interface" }
+rustc_error_codes   = { path = "../rust/compiler/rustc_error_codes" }
+rustc_errors        = { path = "../rust/compiler/rustc_errors" }
+rustc_session       = { path = "../rust/compiler/rustc_session" }
+rustc_span          = { path = "../rust/compiler/rustc_span" }
+rustc_ast_pretty    = { path = "../rust/compiler/rustc_ast_pretty"}
+rustc-hash = "1.1.0"
 
