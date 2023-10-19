@@ -64,7 +64,6 @@ extern crate rustc_interface;
 extern crate rustc_session;
 extern crate rustc_span;
 
-use std::{path, process, str};
 use std::path::PathBuf;
 
 use rustc_ast_pretty::pprust::item_to_string;
@@ -72,17 +71,9 @@ use rustc_errors::registry;
 use rustc_session::config::{self, CheckCfg};
 
 fn main() {
-    let out = process::Command::new("rustc")
-        .arg("--print=sysroot")
-        .current_dir(".")
-        .output()
-        .unwrap();
-    let sysroot = str::from_utf8(&out.stdout).unwrap().trim();
+
     let config = rustc_interface::Config {
-        opts: config::Options {
-            maybe_sysroot: Some(path::PathBuf::from(sysroot)),
-            ..config::Options::default()
-        },
+        opts: Default::default(),
         input: config::Input::File(PathBuf::from(r"playground.rs")),
         crate_cfg: rustc_hash::FxHashSet::default(),
         crate_check_cfg: CheckCfg::default(),
@@ -101,7 +92,6 @@ fn main() {
     };
     rustc_interface::run_compiler(config, |compiler| {
         compiler.enter(|queries| {
-            // TODO: add this to -Z unpretty
             let ast_krate = queries.parse().unwrap().get_mut().clone();
             for item in ast_krate.items {
                 println!("{}", item_to_string(&item));
