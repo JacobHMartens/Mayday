@@ -18,3 +18,11 @@ rustc_span          = { path = "../rust/compiler/rustc_span" }
 rustc_ast_pretty    = { path = "../rust/compiler/rustc_ast_pretty"}
 rustc-hash = "1.1.0"
 
+[[example]]
+name = "playground"
+
+[[example]]
+name = "query_rustc_interface"
+
+[[example]]
+name = "query_rustc_driver"

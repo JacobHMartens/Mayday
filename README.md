@@ -32,6 +32,7 @@ Then run:
 git submodule update --init --recursive
 
 If it persists, then you are probably trying to compile and run with cargo. Use rustc to compile and rustup to run instead.
-rustc main.rs \
+rustc main.rs 
+\
 rustup run nightly ./main
 
