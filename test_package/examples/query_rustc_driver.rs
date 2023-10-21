@@ -43,7 +43,7 @@ impl rustc_driver::Callbacks for CustomCallbacks {
 
 fn main() {
     let args: Vec<String> = vec!["playground.rs".to_string()];
-    let mut callbacks = rustc_driver::TimePassesCallbacks::default();
+    let mut callbacks = CustomCallbacks;
     let run_compiler = rustc_driver::RunCompiler::new(&args, &mut callbacks);
     let _ = run_compiler.run();
 }

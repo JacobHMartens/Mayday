@@ -2,6 +2,13 @@
 Bachelor Project - Building a tool for analysing unsafe code in Rust
 
 ## Install rust compiler library
+### NEW
+Install rustc-dev and llvm-tools components
+
+rustup component add rustc-dev --toolchain nightly-2023-21-10
+rustup component add llvm-tools --toolchain nightly-2023-21-10
+
+### OUTDATED
 git clone https://github.com/rust-lang/rust.git
 
 cd rust
@@ -13,9 +20,9 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ./x build
 
 ## Set workspace environment to use Nightly
-rustup toolchain install nightly
+rustup toolchain install nightly-2023-21-10
 
-rustup override set nightly
+rustup override set nightly-2023-21-10
 
 ## Build errors
 If you get a build error like the following:\

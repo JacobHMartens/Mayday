@@ -1,9 +1,3 @@
 [workspace]
-
-members = [
-    "test_package",
-]
-
-exclude = [
-    "rust",
-]
+resolver = "2"
+members = ["test_package"]

@@ -7,16 +7,16 @@ authors = ["Jacob Martens"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rustc_middle        = { path = "../rust/compiler/rustc_middle" }
-rustc_hir           = { path = "../rust/compiler/rustc_hir" }
-rustc_driver        = { path = "../rust/compiler/rustc_driver" }
-rustc_interface     = { path = "../rust/compiler/rustc_interface" }
-rustc_error_codes   = { path = "../rust/compiler/rustc_error_codes" }
-rustc_errors        = { path = "../rust/compiler/rustc_errors" }
-rustc_session       = { path = "../rust/compiler/rustc_session" }
-rustc_span          = { path = "../rust/compiler/rustc_span" }
-rustc_ast_pretty    = { path = "../rust/compiler/rustc_ast_pretty"}
-rustc-hash = "1.1.0"
+rustc_middle = "0.0.0"
+rustc_hir  = "0.0.0"
+rustc_driver = "0.0.0"
+rustc_interface  = "0.0.0"
+rustc_error_codes = "0.0.0"
+rustc_errors = "0.0.0"
+rustc_session = "0.0.0"
+rustc_span = "0.0.0"
+rustc_ast_pretty = "0.0.0"
+rustc-hash = "1.0.1"
 
 [[example]]
 name = "playground"
