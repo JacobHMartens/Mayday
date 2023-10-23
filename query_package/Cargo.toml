@@ -1,0 +1,16 @@
+[package]
+name = "query_package"
+version = "0.1.0"
+edition = "2021"
+authors = ["Jacob Martens"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dev-dependencies]
+
+
+[[example]]
+name = "query_rustc_interface"
+
+[[example]]
+name = "query_rustc_driver"

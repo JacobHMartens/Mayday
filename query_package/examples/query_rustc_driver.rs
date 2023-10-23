@@ -14,36 +14,36 @@ extern crate rustc_middle;
 extern crate rustc_session;
 extern crate rustc_span;
 
+use rustc_driver::{Callbacks, Compilation, RunCompiler};
+use rustc_interface::{interface, Queries};
+use rustc_hir::ItemKind;
+
 pub struct CustomCallbacks;
 
-impl rustc_driver::Callbacks for CustomCallbacks {
-    fn config(&mut self, config: &mut rustc_interface::interface::Config) {
-        config.input = rustc_session::config::Input::File(std::path::PathBuf::from(r"playground.rs"))
-    }
-
+impl Callbacks for CustomCallbacks {
     fn after_analysis<'tcx>(
-        &mut self, 
-        _compiler: &rustc_interface::interface::Compiler, 
-        queries: &'tcx rustc_interface::Queries<'tcx>
-    ) -> rustc_driver::Compilation {
+        &mut self,
+        _compiler: &interface::Compiler,
+        queries: &'tcx Queries<'tcx>
+    ) -> Compilation {
         queries.global_ctxt().unwrap().enter(|tcx| {
             for id in tcx.hir().items() {
                 let item = tcx.hir().item(id);
                 match item.kind {
-                    rustc_hir::ItemKind::Fn(_, _, _) => {
+                    ItemKind::Fn(_, _, _) => {
                         println!("Function: {:?}", item.ident);
                     }
                     _ => {}
                 }
             }
         });
-        rustc_driver::Compilation::Continue
+        Compilation::Continue
     }
 }
 
 fn main() {
-    let args: Vec<String> = vec!["playground.rs".to_string()];
+    let args: Vec<String> = vec![r"rustc".to_string(), r"unsafe_example/src/main.rs".to_string()];
     let mut callbacks = CustomCallbacks;
-    let run_compiler = rustc_driver::RunCompiler::new(&args, &mut callbacks);
+    let run_compiler = RunCompiler::new(&args, &mut callbacks);
     let _ = run_compiler.run();
 }

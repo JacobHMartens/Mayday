@@ -1,3 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["test_package"]
+members = [
+    "unsafe_example",
+    "query_package"
+]
