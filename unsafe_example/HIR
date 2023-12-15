@@ -743,22 +743,14 @@ Crate {
                                                                                             ),
                                                                                             segments: [
                                                                                                 PathSegment {
-
-ident: add_to_count#0,
-
-hir_id: HirId(DefId(0:5 ~ unsafe_example[683a]::main).10),
-
-res: Def(
-
-    Fn,
-
-    DefId(0:4 ~ unsafe_example[683a]::add_to_count),
-
-),
-
-args: None,
-
-infer_args: true,
+                                                                                                    ident: add_to_count#0,
+                                                                                                    hir_id: HirId(DefId(0:5 ~ unsafe_example[683a]::main).10),
+                                                                                                    res: Def(
+                                                                                                        Fn,
+                                                                                                        DefId(0:4 ~ unsafe_example[683a]::add_to_count),
+                                                                                                    ),
+                                                                                                    args: None,
+                                                                                                    infer_args: true,
                                                                                                 },
                                                                                             ],
                                                                                         },
@@ -775,28 +767,18 @@ infer_args: true,
                                                                                             Path {
                                                                                                 span: unsafe_example\src\main.rs:9:27: 9:28 (#0),
                                                                                                 res: Local(
-
-HirId(DefId(0:5 ~ unsafe_example[683a]::main).6),
+                                                                                                    HirId(DefId(0:5 ~ unsafe_example[683a]::main).6),
                                                                                                 ),
                                                                                                 segments: [
-
-PathSegment {
-
-    ident: x#0,
-
-    hir_id: HirId(DefId(0:5 ~ unsafe_example[683a]::main).12),
-
-    res: Local(
-
-        HirId(DefId(0:5 ~ unsafe_example[683a]::main).6),
-
-    ),
-
-    args: None,
-
-    infer_args: true,
-
-},
+                                                                                                    PathSegment {
+                                                                                                        ident: x#0,
+                                                                                                        hir_id: HirId(DefId(0:5 ~ unsafe_example[683a]::main).12),
+                                                                                                        res: Local(
+                                                                                                            HirId(DefId(0:5 ~ unsafe_example[683a]::main).6),
+                                                                                                        ),
+                                                                                                        args: None,
+                                                                                                        infer_args: true,
+                                                                                                    },
                                                                                                 ],
                                                                                             },
                                                                                         ),
@@ -863,3 +845,4 @@ PathSegment {
             3059985626386332612,
         ),
     ),
+}
