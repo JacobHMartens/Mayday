@@ -3,7 +3,6 @@
 extern crate rustc_driver;
 extern crate rustc_hir;
 extern crate rustc_interface;
-extern crate rustc_session;
 
 use rustc_driver::{Callbacks, Compilation, RunCompiler};
 use rustc_interface::{interface, Queries};

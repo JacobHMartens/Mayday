@@ -9,6 +9,10 @@ authors = ["Jacob Martens"]
 [dev-dependencies]
 
 
+[package.metadata.rust-analyzer]
+rustc_private=true
+
+
 [[example]]
 name = "query_rustc_interface"
 

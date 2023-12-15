@@ -19,6 +19,10 @@ rustup component add llvm-tools --toolchain nightly-2023-21-10
 rustup component add rust-src --toolchain nightly-2023-21-10
 ```
 
+For VS Code to allow code completion of rustc crates:
+https://model-checking.github.io/kani/rustc-hacks.html#code-analysis-for-rustc-definitions
+
+
 ## Run query examples
 Run the following after replacing <example_file> with the name of the example file, e.g. query_rustc_driver.
 ```bash
