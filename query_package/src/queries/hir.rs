@@ -6,33 +6,31 @@ use rustc_middle::hir::map::Map;
 
 const UNSAFE_BLOCK: BlockCheckMode =  BlockCheckMode::UnsafeBlock(UnsafeSource::UserProvided);
 
-struct Unsafeties<'hir> {
-    unsafe_functions: Vec<Item<'hir>>,
+pub fn unsafe_functions<'hir>(hir: Map<'hir>) -> Vec<Item<'hir>> {
+    unsafe_functions_and_traits(hir).0
+}
+
+pub fn unsafe_traits<'hir>(hir: Map<'hir>) -> Vec<Item<'hir>> {
+    unsafe_functions_and_traits(hir).1
 }
 
 // Returns all unsafe functions and traits from the provided HIR map
-pub fn unsafe_functions_and_traits<'hir>(hir: Map<'hir>) -> Vec<Item<'hir>> {
+fn unsafe_functions_and_traits<'hir>(hir: Map<'hir>) -> (Vec<Item<'hir>>, Vec<Item<'hir>>) {
     let mut unsafe_functions: Vec<Item<'hir>> = vec![];
+    let mut unsafe_traits: Vec<Item<'hir>> = vec![];
 
     // Iterate over all HIR items to find function declarations
     for id in hir.items() {
         let item = hir.item(id);
         match item.kind {
-            ItemKind::Fn(fn_sig, _, _) => {
-                // Store function-item if it is declared as unsafe
-                if fn_sig.header.unsafety == Unsafety::Unsafe {
-                    unsafe_functions.push(*item);
-                }
-            }
-            ItemKind::Trait(_, unsafety, _, _, _) => {
-                if unsafety == Unsafety::Unsafe {
-
-                }
-            }
+            // Store function-item if it is declared as unsafe
+            ItemKind::Fn(fn_sig, _, _) if fn_sig.header.unsafety == Unsafety::Unsafe => unsafe_functions.push(*item),
+            // Store trait-item if it is declared as unsafe
+            ItemKind::Trait(_, unsafety, _, _, _) if unsafety == Unsafety::Unsafe => unsafe_traits.push(*item),
             _ => {}
         }
     }
-    unsafe_functions
+    (unsafe_functions, unsafe_traits)
 }
 
 // Returns all unsafe blocks from the provided HIR map
