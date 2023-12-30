@@ -1,10 +1,12 @@
-use rustc_driver::{Callbacks, Compilation};
+mod queries;
+
+use rustc_driver::{Callbacks, Compilation, RunCompiler};
 use rustc_interface::{interface, Queries};
 
+use queries::hir::{unsafe_functions, unsafe_blocks, unsafe_traits};
+use crate::tool::cli;
 
-use crate::queries::hir::{unsafe_functions, unsafe_blocks, unsafe_traits};
-
-pub struct CustomCallbacks;
+struct CustomCallbacks;
 
 impl Callbacks for CustomCallbacks {
 
@@ -28,4 +30,15 @@ impl Callbacks for CustomCallbacks {
         });
         Compilation::Continue
     }
+}
+
+
+pub fn compile() {
+    let mut args: Vec<String> = vec!["rustc".to_string()];
+    args.extend_from_slice(&cli::compiler_args());
+
+    let mut callbacks = CustomCallbacks;
+
+    let compiler = RunCompiler::new(&args, &mut callbacks);
+    let _ = compiler.run();
 }
