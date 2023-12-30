@@ -4,3 +4,4 @@ members = [
     "unsafe_example",
     "query_package"
 ]
+exclude = ["samples"]
