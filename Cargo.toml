@@ -1,7 +1,8 @@
 [workspace]
 resolver = "2"
 members = [
-    "unsafe_example",
-    "query_package"
+    "compiler",
+    "mayday",
+    "unsafe_example"
 ]
 exclude = ["samples"]

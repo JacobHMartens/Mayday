@@ -19,7 +19,7 @@ fn unsafe_functions_and_traits<'hir>(hir: Map<'hir>) -> (Vec<Item<'hir>>, Vec<It
     let mut unsafe_functions: Vec<Item<'hir>> = vec![];
     let mut unsafe_traits: Vec<Item<'hir>> = vec![];
 
-    // Iterate over all HIR items to find function declarations
+    // Iterate over all HIR items to find functions and traits
     for id in hir.items() {
         let item = hir.item(id);
         match item.kind {

@@ -8,10 +8,10 @@ struct Args {
     path: String
 }
 
-pub fn compiler_args() -> Vec<String> {
-    let cli_args = Args::parse();
-    return vec![cli_args.path];
-}
+// pub fn compiler_args() -> Vec<String> {
+//     let cli_args = Args::parse();
+//     return vec![cli_args.path];
+// }
 
 fn validate_path(path: &str) -> Result<String, String> {
     let _path = PathBuf::from(path);

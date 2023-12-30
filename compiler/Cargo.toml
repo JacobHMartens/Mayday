@@ -1,13 +1,9 @@
 [package]
-name = "query_package"
+name = "compiler"
 version = "0.1.0"
 edition = "2021"
 authors = ["Jacob Martens"]
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[dependencies]
-clap = { version = "4.4", features = ["derive"] }
 
 [package.metadata.rust-analyzer]
 rustc_private=true
