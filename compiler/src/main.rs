@@ -1,7 +1,8 @@
 #![feature(rustc_private)]
 
 mod driver;
-mod queries;
+mod collector;
+mod reporter;
 
 fn main() {
     driver::compile();

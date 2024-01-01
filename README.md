@@ -41,3 +41,6 @@ cargo run --example query_rustc_driver
 
 
 
+cargo run --release -p mayday -- memchr
+
+

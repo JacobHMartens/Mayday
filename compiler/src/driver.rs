@@ -3,13 +3,13 @@ extern crate rustc_hir;
 extern crate rustc_interface;
 extern crate rustc_session;
 
-use std::env;
-
 use rustc_driver::{Callbacks, Compilation, RunCompiler};
 use rustc_interface::{interface, Queries};
 use rustc_session::{EarlyErrorHandler, config::ErrorOutputType};
 
-use crate::queries::hir::{unsafe_functions, unsafe_blocks, unsafe_traits};
+use std::env;
+
+use crate::{collector::UnsafeCollector, reporter::UnsafeReporter};
 
 struct CustomCallbacks;
 
@@ -21,17 +21,17 @@ impl Callbacks for CustomCallbacks {
         queries: &'tcx Queries<'tcx>
     ) -> Compilation {
         queries.global_ctxt().unwrap().enter(|tcx| {
-            let hir = tcx.hir();
-            for item in unsafe_functions(hir) {
-                println!("Unsafe Function: {:?}", item.ident);
-            }
-            for item in unsafe_traits(hir) {
-                println!("Unsafe Trait: {:?}", item.ident);
-            }
+            let mut collector = UnsafeCollector { 
+                tcx,
+                functions: vec![],
+                traits: vec![],
+                impls: vec![],
+                blocks: vec![], 
+            };
+
+            tcx.hir().visit_all_item_likes_in_crate(&mut collector);
+            collector.report_unsafe_code();            
             
-            for block in unsafe_blocks(hir) {
-                println!("Unsafe block: {:?}", block.span);
-            }
         });
         Compilation::Stop
     }

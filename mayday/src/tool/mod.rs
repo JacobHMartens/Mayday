@@ -4,9 +4,10 @@ mod cli;
 
 pub fn run_tool() {
     let compiler_path = ready_compiler();
+    let args = cli::get_args();
     let output = Command::new("cargo")
         .arg("build")
-        .args(["-p", "unsafe_example"])
+        .args(["-p", &args.target_path, "--release"])
         .arg("--")
         .env("RUSTC", compiler_path.as_os_str())
         .output()
@@ -39,7 +40,7 @@ fn compiler_path_from_tool_path(tool_path: PathBuf) -> PathBuf {
 fn build_compiler() {
     let build_status = Command::new("cargo")
         .arg("build")
-        .args(["-p", "compiler"])
+        .args(["-p", "compiler", "--release"])
         .status()
         .expect("Failed to build compiler");
     assert!(build_status.success());
