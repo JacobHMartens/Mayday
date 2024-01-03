@@ -4,6 +4,5 @@ members = [
     "compiler",
     "mayday",
     "unsafe_example",
-    "memchr"  # Must be in workspace because of the way cargo run -p works. See https://doc.rust-lang.org/cargo/commands/cargo-pkgid.html
 ]
 exclude = ["samples"]

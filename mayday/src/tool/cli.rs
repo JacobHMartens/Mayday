@@ -14,11 +14,7 @@ pub fn get_args() -> Args {
 
 fn validate_target_path(path: &str) -> Result<String, String> {
     let _path = PathBuf::from(path);
-    if !_path.is_dir() {
-        return Err(format!("Invalid path: Expected path to a Cargo directory. Got {}.", path));
-    }
-    // if !(_path.is_file() && path.ends_with(".rs")) {
-    //     return Err(format!("Invalid file path: Expected path to a Rust file. Got {}.", path));
-    // }
+    // TODO: Cargo check path
+    
     return Ok(path.to_string());
 }
