@@ -26,7 +26,11 @@ impl Callbacks for CustomCallbacks {
                 functions: vec![],
                 traits: vec![],
                 impls: vec![],
-                blocks: vec![], 
+                blocks: vec![],
+                count_functions: 0, 
+                count_traits: 0, 
+                count_impls: 0, 
+                count_blocks: 0
             };
 
             tcx.hir().visit_all_item_likes_in_crate(&mut collector);

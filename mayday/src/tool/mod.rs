@@ -1,18 +1,21 @@
-use std::{env, process::Command, path::PathBuf};
+use std::{env, process::Command, path::PathBuf, io::{self, Write}};
 
 mod cli;
 
 pub fn run_tool() {
     let compiler_path = ready_compiler();
     let args = cli::get_args();
-    let output = Command::new("cargo")
+    let build_target = Command::new("cargo")
         .arg("build")
         .args(["-p", &args.target_path, "--release"])
         .arg("--")
         .env("RUSTC", compiler_path.as_os_str())
         .output()
         .expect("Failed to run tool");
-    println!("Output:\n{}", String::from_utf8_lossy(&output.stdout));
+    
+    io::stdout().write_all(&build_target.stdout).unwrap();
+    io::stderr().write_all(&build_target.stderr).unwrap();
+    assert!(build_target.status.success());
 }
 
 fn ready_compiler() -> PathBuf {
@@ -38,10 +41,12 @@ fn compiler_path_from_tool_path(tool_path: PathBuf) -> PathBuf {
 }
 
 fn build_compiler() {
-    let build_status = Command::new("cargo")
+    let build_compiler = Command::new("cargo")
         .arg("build")
         .args(["-p", "compiler", "--release"])
-        .status()
+        .output()
         .expect("Failed to build compiler");
-    assert!(build_status.success());
+
+    io::stderr().write_all(&build_compiler.stderr).unwrap();
+    assert!(build_compiler.status.success());
 }
