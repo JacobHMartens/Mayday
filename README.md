@@ -43,5 +43,5 @@ cargo run --example query_rustc_driver
 
 ```..\..\target\release\mayday.exe <target>```
 
-Try to switch to memchr dir before running cargo build
+Try to switch to target dir before running cargo build
 
