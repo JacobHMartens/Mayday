@@ -4,11 +4,21 @@ mod cli;
 
 pub fn run_tool() {
     let compiler_path = ready_compiler();
-    let args = cli::get_args();
+    let mut cargo_args = cli::get_args().cargo_args;
+
+    // Remove --release from input args such that it can be explicitly added to
+    // cargo build (Cargo throws an error if --release is used multiple times)
+    cargo_args.retain(|arg| arg != "--release");
+
+    // If the target is already built, then it will not be rebuilt.
+    // Thus, we clean the target's release artifacts before building.
+    let cargo_clean_status = Command::new("cargo").args(["clean", "--release"]).status();
+    println!("Cargo clean success: {:?}", cargo_clean_status);
+
     let build_target = Command::new("cargo")
         .arg("build")
-        .args(["-p", &args.target_path, "--release"])
-        .arg("--")
+        .arg("--release")
+        .args(cargo_args)
         .env("RUSTC", compiler_path.as_os_str())
         .output()
         .expect("Failed to run tool");
