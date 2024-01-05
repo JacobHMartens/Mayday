@@ -8,5 +8,6 @@ fn main() {
     tool::run_tool();
 
     let execution_time = start.elapsed();
-    println!("Duration: {:?}", execution_time);
+    if execution_time.is_ok() { println!("Total duration: {:?}", execution_time.unwrap()); }
+    else { println!("Execution timing failed"); }
 }
