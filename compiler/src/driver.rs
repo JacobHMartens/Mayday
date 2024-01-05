@@ -37,7 +37,7 @@ impl Callbacks for CustomCallbacks {
             collector.report_unsafe_code();            
             
         });
-        Compilation::Stop
+        Compilation::Continue
     }
 }
 
