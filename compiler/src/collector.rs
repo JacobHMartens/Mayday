@@ -6,8 +6,6 @@ use rustc_hir::{intravisit::Visitor, FnSig, Item, ItemKind, Impl, Block, Unsafet
 use rustc_middle::{hir::nested_filter, ty::TyCtxt};
 use rustc_hir::intravisit::FnKind::{ItemFn, Method};
 
-use crate::reporter::UnsafeReporter;
-
 const UNSAFE_BLOCK: BlockCheckMode = BlockCheckMode::UnsafeBlock(UnsafeSource::UserProvided);
 
 pub struct UnsafeCollector<'hir> {
@@ -20,16 +18,6 @@ pub struct UnsafeCollector<'hir> {
     pub count_traits: usize,
     pub count_impls: usize,
     pub count_blocks: usize
-}
-
-impl<'hir> UnsafeReporter for UnsafeCollector<'hir> {
-    fn report_unsafe_code(&self) {
-        println!("Report:");
-        println!("Unsafe functions: {:?} out of {:?} functions ({:.1}%)", self.functions.len(), self.count_functions, 100.0*self.functions.len() as f64 /self.count_functions as f64);
-        println!("Unsafe Traits: {:?} out of {:?} traits ({:.1}%)", self.traits.len(), self.count_traits, 100.0*self.traits.len() as f64/self.count_traits as f64);
-        println!("Unsafe Impls: {:?} out of {:?} trait implementations ({:.1}%)", self.impls.len(), self.count_impls, 100.0*self.impls.len() as f64/self.count_impls as f64);
-        println!("Unsafe Blocks: {:?} out of {:?} blocks ({:.1}%)", self.blocks.len(), self.count_blocks, 100.0*self.blocks.len() as f64/self.count_blocks as f64);
-    }
 }
 
 impl<'hir> Visitor<'hir> for UnsafeCollector<'hir> {
