@@ -24,7 +24,7 @@ fn run_tool() {
 
     // Remove --release from input args such that it can be explicitly added to
     // cargo build (Cargo throws an error if --release is used multiple times).
-    let mut cargo_args = cli_args.cargo_args;
+    let mut cargo_args = cli_args.cargo_build_args;
     cargo_args.retain(|arg| arg != "--release");
 
     // If the target is already built, then it will not be rebuilt.
