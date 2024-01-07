@@ -10,10 +10,10 @@ const UNSAFE_BLOCK: BlockCheckMode = BlockCheckMode::UnsafeBlock(UnsafeSource::U
 
 pub struct UnsafeCollector<'hir> {
     pub tcx: TyCtxt<'hir>,
-    pub functions: Vec<FnSig<'hir>>,
-    pub traits: Vec<Item<'hir>>,  // vector should only contain the 'Trait' variant of ItemKind
-    pub impls: Vec<Item<'hir>>,
-    pub blocks: Vec<Block<'hir>>,
+    pub unsafe_functions: Vec<FnSig<'hir>>,
+    pub unsafe_traits: Vec<Item<'hir>>,
+    pub unsafe_impls: Vec<Item<'hir>>,
+    pub unsafe_blocks: Vec<Block<'hir>>,
     pub count_functions: usize,
     pub count_traits: usize,
     pub count_impls: usize,
@@ -36,13 +36,13 @@ impl<'hir> Visitor<'hir> for UnsafeCollector<'hir> {
         match item.kind {
             ItemKind::Trait(_, unsafety, _, _, _) => {
                 if unsafety == Unsafety::Unsafe {
-                    self.traits.push(*item)
+                    self.unsafe_traits.push(*item)
                 }
                 self.count_traits += 1;
             }
             ItemKind::Impl(Impl { unsafety, .. }) => {
                 if *unsafety == Unsafety::Unsafe {
-                    self.impls.push(*item)
+                    self.unsafe_impls.push(*item)
                 }
                 self.count_impls += 1;
             }
@@ -57,13 +57,13 @@ impl<'hir> Visitor<'hir> for UnsafeCollector<'hir> {
         match fn_kind {
             ItemFn(ident, _, header) => {
                 if header.unsafety == Unsafety::Unsafe {
-                    self.functions.push(FnSig {header, decl: fn_decl, span: ident.span})
+                    self.unsafe_functions.push(FnSig {header, decl: fn_decl, span: ident.span})
                 }
                 self.count_functions += 1;
             }
             Method(_, fn_sig) => {
                 if fn_sig.header.unsafety == Unsafety::Unsafe {
-                    self.functions.push(*fn_sig)
+                    self.unsafe_functions.push(*fn_sig)
                 }
                 self.count_functions += 1;
             }
@@ -75,7 +75,7 @@ impl<'hir> Visitor<'hir> for UnsafeCollector<'hir> {
     fn visit_block(&mut self, block: &'hir Block<'hir>) {
         // Collect unsafe blocks
         if block.rules == UNSAFE_BLOCK {
-            self.blocks.push(*block);
+            self.unsafe_blocks.push(*block);
         }
         self.count_blocks += 1;
         rustc_hir::intravisit::walk_block(self, block);

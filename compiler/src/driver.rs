@@ -23,10 +23,10 @@ impl Callbacks for CustomCallbacks {
         queries.global_ctxt().unwrap().enter(|tcx| {
             let mut collector = UnsafeCollector { 
                 tcx,
-                functions: vec![],
-                traits: vec![],
-                impls: vec![],
-                blocks: vec![],
+                unsafe_functions: vec![],
+                unsafe_traits: vec![],
+                unsafe_impls: vec![],
+                unsafe_blocks: vec![],
                 count_functions: 0, 
                 count_traits: 0, 
                 count_impls: 0, 
