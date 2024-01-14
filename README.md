@@ -9,22 +9,25 @@ The following setup is only necessary if the compilation fails when running one 
 
 ### Set the workspace toolchain to Nightly
 ```bash
-rustup toolchain install nightly-2023-21-10
-rustup override set nightly-2023-21-10
+rustup toolchain install nightly-2023-10-21-x86_64-pc-windows-msvc
+rustup override set nightly-2023-10-21-x86_64-pc-windows-msvc
 ```
 
 ### Install the rust compiler library
 Install the necessary toolchain components.
 Run the following:
 ```bash
-rustup component add rustc-dev --toolchain nightly-2023-21-10
-rustup component add llvm-tools --toolchain nightly-2023-21-10
-rustup component add rust-src --toolchain nightly-2023-21-10
+rustup component add rustc-dev --toolchain nightly-2023-10-21-x86_64-pc-windows-msvc
+rustup component add llvm-tools --toolchain nightly-2023-10-21-x86_64-pc-windows-msvc
+rustup component add rust-src --toolchain nightly-2023-10-21-x86_64-pc-windows-msvc
 ```
 
 For VS Code to allow code completion of rustc crates:
 https://model-checking.github.io/kani/rustc-hacks.html#code-analysis-for-rustc-definitions
 
+
+## Development setup
+Include guide to VS Code
 
 ## Run query examples
 To execute an example, run the following after replacing <example_file> with the name of the example file.
@@ -39,9 +42,4 @@ cargo run --example query_rustc_driver
 #   Function: main#0
 ```
 
-
-
-```..\..\target\release\mayday.exe <target>```
-
-Try to switch to target dir before running cargo build
 
