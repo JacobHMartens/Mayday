@@ -1,5 +1,4 @@
-# BachelorProject
-Bachelor Project - Building a tool for analysing unsafe code in Rust
+# Mayday - A tool for analysing unsafe code in Rust
 
 ## Workspace setup
 The required toolchain and components will be downloaded and installed automatically 
@@ -25,9 +24,6 @@ rustup component add rust-src --toolchain nightly-2023-10-21-x86_64-pc-windows-m
 For VS Code to allow code completion of rustc crates:
 https://model-checking.github.io/kani/rustc-hacks.html#code-analysis-for-rustc-definitions
 
-
-## Development setup
-Include guide to VS Code
 
 ## Run query examples
 To execute an example, run the following after replacing <example_file> with the name of the example file.
